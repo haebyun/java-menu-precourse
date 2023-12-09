@@ -76,7 +76,7 @@ public class Recommender {
                     coach.getName(),
                     selectRandomMenu(
                             coach,
-                            menuHistory.getOrDefault(coach.getName(), new ArrayList<>()),
+                            menuHistory,
                             menuCategory.getMenusToStringList())
             );
         }
@@ -85,12 +85,15 @@ public class Recommender {
 
     private Menu selectRandomMenu(
             Coach coach,
-            List<Menu> history,
+            Map<String, List<Menu>> menuHistory,
             List<String> menus
     ) {
+        List<Menu> history = menuHistory.getOrDefault(coach.getName(), new ArrayList<>());
         while(true) {
             Menu menu = Menu.from(Randoms.shuffle(menus).get(0));
             if (coach.canEat(menu) && doesNotContain(history, menu)) {
+                history.add(menu);
+                menuHistory.put(coach.getName(), history);
                 return menu;
             }
         }
