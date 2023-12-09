@@ -1,5 +1,6 @@
 package menu.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Coaches {
@@ -20,5 +21,9 @@ public class Coaches {
 
     public static Coaches from(List<Coach> coaches) {
         return new Coaches(coaches);
+    }
+
+    public List<Coach> getCoaches() {
+        return Collections.unmodifiableList(coaches);
     }
 }
