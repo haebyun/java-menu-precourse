@@ -1,5 +1,6 @@
 package menu.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static menu.domain.Menu.*;
@@ -28,5 +29,18 @@ public enum MenuCategory {
     MenuCategory(int number, List<Menu> menus) {
         this.number = number;
         this.menus = menus;
+    }
+
+    public List<String> getMenusToStringList() {
+        return menus.stream()
+                .map(menu -> menu.getMenu())
+                .toList();
+    }
+
+    public static MenuCategory findByNumber(final int number) {
+        return Arrays.stream(values())
+                .filter(category -> category.number == number)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("해당하는 번호의 카테고리가 없습니다"));
     }
 }
