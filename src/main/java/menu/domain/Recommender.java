@@ -28,39 +28,37 @@ public class Recommender {
 
     public RecommendResult recommend() {
         Map<DayOfWeek, MenuResult> result = new HashMap<>();
+        // cache
         Map<String, List<Menu>> menuHistory = new HashMap<>();
-        Map<DayOfWeek, MenuCategory> categories = new HashMap<>();
+        List<MenuCategory> categories = new ArrayList<>();
         for(DayOfWeek day : DAYS) {
             MenuCategory menuCategory = selectCategory(categories);
             result.put(
                     day,
                     recommendMenu(menuCategory, menuHistory)
             );
-            categories.put(
-                    day,
-                    menuCategory
-            );
         }
         return new RecommendResult(result);
     }
 
-    private MenuCategory selectCategory(Map<DayOfWeek, MenuCategory> categories) {
+    private MenuCategory selectCategory(List<MenuCategory> categories) {
+
         while(true) {
             MenuCategory category = MenuCategory.findByNumber(
                     Randoms.pickNumberInRange(1, 5)
             );
-
             if(canSelectCategory(categories, category)) {
+                categories.add(category);
                 return category;
             }
         }
     }
 
     private boolean canSelectCategory(
-            Map<DayOfWeek, MenuCategory> categories,
+            List<MenuCategory> categories,
             MenuCategory target
     ) {
-        long count = categories.values().stream()
+        long count = categories.stream()
                 .filter(category -> category.equals(target))
                 .count();
         return count < 2;
