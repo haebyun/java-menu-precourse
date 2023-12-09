@@ -25,7 +25,7 @@ public class MenuController {
         // 메뉴 추천 기능
         Recommender recommender = Recommender.from(coaches);
         RecommendResult result = recommender.recommend();
-        outputView.printRecommendResult(result);
+        outputView.printRecommendResults(result);
     }
 
     private Coaches generateCoaches() {
@@ -37,7 +37,7 @@ public class MenuController {
         for (String name : names) {
             retry(() -> {
                 List<Menu> forbiddenMenus = inputView.enterForbiddenMenus(name);
-                return coaches.add(Coach.from(name, forbiddenMenus)); // return을 사용해도 되는지?
+                return coaches.add(Coach.from(name, forbiddenMenus));
             });
         }
         return Coaches.from(coaches);
