@@ -28,7 +28,6 @@ public class InputView {
         }
     }
 
-
     private List<String> parseToList(String message) {
         return Arrays.stream(message.split(",")).toList();
     }
