@@ -13,7 +13,7 @@ public enum Menu {
 
     public static Menu from(String target) {
         for (Menu menu : Menu.values()) {
-            if (menu.name() == formatMenu(target)) {
+            if (menu.name().equals(formatMenu(target))) {
                 return menu;
             }
         }
