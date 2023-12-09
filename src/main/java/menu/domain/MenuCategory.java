@@ -41,6 +41,6 @@ public enum MenuCategory {
         return Arrays.stream(values())
                 .filter(category -> category.number == number)
                 .findFirst()
-                .orElseThrow(() -> new IllegalStateException("해당하는 번호의 카테고리가 없습니다"));
+                .orElseThrow(() -> new IllegalStateException("[ERROR] 해당하는 번호의 카테고리가 없습니다"));
     }
 }

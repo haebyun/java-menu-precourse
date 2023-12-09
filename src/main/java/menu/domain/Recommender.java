@@ -20,11 +20,11 @@ public class Recommender {
 
     public RecommendResult recommend() {
         Map<DayOfWeek, MenuResult> result = new HashMap<>();
-        // cache
+        // cache Collections
         Map<String, List<Menu>> menuHistory = new HashMap<>();
-        List<MenuCategory> categories = new ArrayList<>();
+        List<MenuCategory> categoryHistory = new ArrayList<>();
         for(DayOfWeek day : DayOfWeek.values()) {
-            MenuCategory menuCategory = selectCategory(categories);
+            MenuCategory menuCategory = selectCategory(categoryHistory);
             result.put(
                     day,
                     recommendMenu(menuCategory, menuHistory)
@@ -33,24 +33,23 @@ public class Recommender {
         return new RecommendResult(result);
     }
 
-    private MenuCategory selectCategory(List<MenuCategory> categories) {
-
+    private MenuCategory selectCategory(List<MenuCategory> history) {
         while(true) {
             MenuCategory category = MenuCategory.findByNumber(
                     Randoms.pickNumberInRange(1, 5)
             );
-            if(canSelectCategory(categories, category)) {
-                categories.add(category);
+            if(canSelectCategory(history, category)) {
+                history.add(category);
                 return category;
             }
         }
     }
 
     private boolean canSelectCategory(
-            List<MenuCategory> categories,
+            List<MenuCategory> history,
             MenuCategory target
     ) {
-        long count = categories.stream()
+        long count = history.stream()
                 .filter(category -> category.equals(target))
                 .count();
         return count < 2;
