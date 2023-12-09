@@ -66,7 +66,8 @@ public class Recommender {
                     selectRandomMenu(
                             coach,
                             menuHistory,
-                            menuCategory.getMenusToStringList())
+                            menuCategory.getMenusToStringList()
+                    )
             );
         }
         return new MenuResult(menuCategory, menus);

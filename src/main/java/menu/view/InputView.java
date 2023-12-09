@@ -18,6 +18,7 @@ public class InputView {
         validateBlankInput(message);
         List<String> names = validateUnsupportedSeparators(message);
         validateDuplicated(names);
+        validateNamesLength(names);
         return names;
     }
 
@@ -31,6 +32,20 @@ public class InputView {
 
     private List<String> parseWithSeparator(String message) {
         return Arrays.stream(message.split(",")).toList();
+    }
+
+    private void validateNamesLength(List<String> names) {
+        for(String name : names) {
+            validateNameLength(name);
+        }
+    }
+
+    private void validateNameLength(String name) {
+        if(name.length() < 2 || name.length() > 4) {
+            throw new IllegalArgumentException(
+                    "[ERROR] 코치의 이름을 2글자 이상, 4글자 이하로 입력해주세요."
+            );
+        }
     }
 
     public List<Menu> enterForbiddenMenus(String name) {

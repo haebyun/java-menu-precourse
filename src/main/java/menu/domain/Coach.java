@@ -7,18 +7,9 @@ public class Coach {
     private List<Menu> forbiddenMenus;
 
     private Coach(String name, List<Menu> forbiddenMenus) {
-        validateNameLength(name);
         validateMenuSize(forbiddenMenus);
         this.name = name;
         this.forbiddenMenus = forbiddenMenus;
-    }
-
-    private void validateNameLength(String name) {
-        if(name.length() < 2 || name.length() > 4) {
-            throw new IllegalArgumentException(
-                    "[ERROR] 코치의 이름을 2글자 이상, 4글자 이하로 입력해주세요."
-            );
-        }
     }
 
     private void validateMenuSize(List<Menu> menus) {
