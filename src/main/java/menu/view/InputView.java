@@ -53,7 +53,7 @@ public class InputView {
     }
 
     public List<Menu> enterForbiddenMenus() {
-
+        System.out.println("토미(이)가 못 먹는 메뉴를 입력해 주세요.");
 
 
     }
