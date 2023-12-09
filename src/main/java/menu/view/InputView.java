@@ -36,13 +36,25 @@ public class InputView {
     public List<Menu> enterForbiddenMenus(String name) {
         System.out.println(name + "(이)가 못 먹는 메뉴를 입력해 주세요.");
         List<String> names = validateForbiddenMenus(Console.readLine());
-        return List.of()
+        try {
+            return names.stream()
+                    .map(menu -> Menu.valueOf(formatMenu(menu)))
+                    .toList();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(
+                    "[ERROR] 해당하는 메뉴가 없습니다."
+            );
+        }
+    }
+
+    private static String formatMenu(String menu) {
+        return menu.replace(' ', '_');
     }
 
     private List<String> validateForbiddenMenus(String message) {
         List<String> names = validateUnsupportedSeparators(message);
         validateDuplicated(names);
-
+        return names;
     }
 
     private List<String> validateUnsupportedSeparators(String message) {
