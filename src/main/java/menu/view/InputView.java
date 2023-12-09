@@ -29,7 +29,7 @@ public class InputView {
         }
     }
 
-    private List<String> parseToList(String message) {
+    private List<String> parseWithSeparator(String message) {
         return Arrays.stream(message.split(",")).toList();
     }
 
@@ -50,13 +50,25 @@ public class InputView {
     }
 
     private List<String> validateUnsupportedSeparators(String message) {
-        if (message.contains(",".repeat(2))
-                || message.startsWith(",") || message.endsWith(",")) {
+        if (isInvalidSeparators(message)) {
             throw new IllegalArgumentException(
                     "[ERROR] 올바르지 않은 구분자 입력입니다."
             );
         }
-        return parseToList(message);
+        return parseWithSeparator(message);
+    }
+
+    private boolean isInvalidSeparators(String message) {
+        return containsDuplicatedSeparators(message)
+                || startsWithOrEndsWithSeparator(message);
+    }
+
+    private boolean startsWithOrEndsWithSeparator(String message) {
+        return message.startsWith(",") || message.endsWith(",");
+    }
+
+    private boolean containsDuplicatedSeparators(String message) {
+        return message.contains(",".repeat(2));
     }
 
     private void validateDuplicated(List<String> inputs) {
