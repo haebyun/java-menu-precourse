@@ -3,6 +3,7 @@ package menu.controller;
 import menu.domain.Coach;
 import menu.domain.Coaches;
 import menu.domain.Menu;
+import menu.domain.Recommender;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -22,7 +23,7 @@ public class MenuController {
 
     public void run() {
         Coaches coaches = generateCoaches();
-        
+        Recommender recommender = Recommender.from(coaches);
     }
 
     private Coaches generateCoaches() {
