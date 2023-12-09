@@ -2,20 +2,12 @@ package menu.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Recommender {
-    private static final List<DayOfWeek> DAYS = List.of(
-                DayOfWeek.MONDAY,
-                DayOfWeek.TUESDAY,
-                DayOfWeek.SUNDAY,
-                DayOfWeek.THURSDAY,
-                DayOfWeek.FRIDAY
-    );
     private final Coaches coaches;
 
     private Recommender(Coaches coaches) {
@@ -31,7 +23,7 @@ public class Recommender {
         // cache
         Map<String, List<Menu>> menuHistory = new HashMap<>();
         List<MenuCategory> categories = new ArrayList<>();
-        for(DayOfWeek day : DAYS) {
+        for(DayOfWeek day : DayOfWeek.values()) {
             MenuCategory menuCategory = selectCategory(categories);
             result.put(
                     day,
