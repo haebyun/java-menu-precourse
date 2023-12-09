@@ -11,6 +11,21 @@ public enum Menu {
 
     라자냐, 그라탱, 뇨끼, 끼슈, 프렌치_토스트, 바게트, 스파게티, 피자, 파니니;
 
+    public static Menu from(String target) {
+        for (Menu menu : Menu.values()) {
+            if (menu.name() == formatMenu(target)) {
+                return menu;
+            }
+        }
+        throw new IllegalArgumentException(
+                "[ERROR] 해당하는 메뉴가 없습니다."
+        );
+    }
+
+    private static String formatMenu(String menu) {
+        return menu.replace(' ', '_');
+    }
+
     public String getMenu() {
         return replaceUnderBarToSpace(this.name());
     }
