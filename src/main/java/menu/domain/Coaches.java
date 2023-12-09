@@ -8,7 +8,7 @@ public class Coaches {
 
     private Coaches(List<Coach> coaches) {
         validateCoachNumber(coaches);
-        coaches = coaches;
+        this.coaches = coaches;
     }
 
     private void validateCoachNumber(List<Coach> coaches) {
