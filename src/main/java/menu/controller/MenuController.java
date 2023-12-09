@@ -8,6 +8,7 @@ import menu.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class MenuController {
     private final InputView inputView;
@@ -21,17 +22,31 @@ public class MenuController {
 
     public void run() {
         Coaches coaches = generateCoaches();
-
+        
     }
 
     private Coaches generateCoaches() {
         List<Coach> coaches = new ArrayList<>();
-        List<String> names = inputView.enterCoachNames();
+        List<String> names = retry(() -> {
+            return inputView.enterCoachNames();
+        });
 
         for (String name : names) {
-            List<Menu> forbiddenMenus = inputView.enterForbiddenMenus(name);
-            coaches.add(Coach.from(name, forbiddenMenus));
+            retry(() -> {
+                List<Menu> forbiddenMenus = inputView.enterForbiddenMenus(name);
+                return coaches.add(Coach.from(name, forbiddenMenus)); // return을 사용해도 되는지?
+            });
         }
         return Coaches.from(coaches);
+    }
+
+    private static <T> T retry(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
