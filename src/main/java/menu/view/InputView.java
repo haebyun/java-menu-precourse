@@ -3,6 +3,7 @@ package menu.view;
 import camp.nextstep.edu.missionutils.Console;
 import menu.domain.Menu;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,6 +49,11 @@ public class InputView {
         }
     }
 
+    /**
+     * 코치가 먹지 못하는 메뉴를 입력받는 메서드
+     * @param name 코치 이름
+     * @return 먹지 못하는 메뉴의 리스트
+     */
     public List<Menu> enterForbiddenMenus(String name) {
         System.out.println();
         System.out.println(name + "(이)가 못 먹는 메뉴를 입력해 주세요.");
@@ -59,6 +65,9 @@ public class InputView {
 
 
     private List<String> validateForbiddenMenus(String message) {
+        if(message.isBlank()) {
+            return new ArrayList<>();
+        }
         List<String> names = validateUnsupportedSeparators(message);
         validateDuplicated(names);
         return names;
