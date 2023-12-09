@@ -33,4 +33,11 @@ public class Coach {
         return new Coach(name, forbiddenMenus);
     }
 
+    public boolean canEat(Menu menu) {
+        return !forbiddenMenus.contains(menu);
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }
