@@ -1,9 +1,6 @@
 package menu.controller;
 
-import menu.domain.Coach;
-import menu.domain.Coaches;
-import menu.domain.Menu;
-import menu.domain.Recommender;
+import menu.domain.*;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -22,8 +19,13 @@ public class MenuController {
     }
 
     public void run() {
+        // 코치 생성
         Coaches coaches = generateCoaches();
+
+        // 메뉴 추천 기능
         Recommender recommender = Recommender.from(coaches);
+        RecommendResult result = recommender.recommend();
+        outputView.printRecommendResult(result);
     }
 
     private Coaches generateCoaches() {

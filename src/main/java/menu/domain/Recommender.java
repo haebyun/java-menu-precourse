@@ -78,7 +78,7 @@ public class Recommender {
                             menuCategory.getMenusToStringList())
             );
         }
-        return new MenuResult(menus);
+        return new MenuResult(menuCategory, menus);
     }
 
     private Menu selectRandomMenu(
