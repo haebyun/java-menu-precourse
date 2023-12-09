@@ -9,6 +9,7 @@ import java.util.List;
 public class InputView {
 
     public List<String> enterCoachNames() {
+        System.out.println();
         System.out.println("코치의 이름을 입력해 주세요. (, 로 구분)");
         return validateCoachNames(Console.readLine());
     }
@@ -33,6 +34,7 @@ public class InputView {
     }
 
     public List<Menu> enterForbiddenMenus(String name) {
+        System.out.println();
         System.out.println(name + "(이)가 못 먹는 메뉴를 입력해 주세요.");
         List<String> names = validateForbiddenMenus(Console.readLine());
         return names.stream()
