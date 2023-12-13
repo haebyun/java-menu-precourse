@@ -8,7 +8,7 @@ import java.util.List;
 public class Recommend {
     public String recommendCategory() {
         int number = Randoms.pickNumberInRange(1,5);
-        return Category.Categories.getNameByIndex(number);
+        return Menu.getCategoryNameByIndex(number);
     }
 
     public String recommendMenu(List<String> menus) {
