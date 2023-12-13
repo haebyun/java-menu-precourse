@@ -9,6 +9,7 @@ public class ValidateCoachName {
         String[] splitInput = validateFormat(input);
         validateNameLength(splitInput);
         valiateCoachSize(splitInput);
+        checkDupllicatedName(splitInput);
     }
 
     private String[] validateFormat(String input) {
@@ -29,6 +30,12 @@ public class ValidateCoachName {
 
     private void valiateCoachSize(String[] input) {
         if (input.length < 2 || input.length > 5) {
+            throw new InvalidCoachNameException();
+        }
+    }
+
+    private static void checkDupllicatedName(String[] input) {
+        if (input.length != Arrays.stream(input).distinct().count()) {
             throw new InvalidCoachNameException();
         }
     }
