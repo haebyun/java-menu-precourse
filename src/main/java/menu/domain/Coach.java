@@ -9,8 +9,9 @@ public class Coach {
     private String[] hateMenus;
     private List<String> weekMenus;
 
-    public Coach(String name) {
+    public Coach(String name, String[] hateMenus) {
         this.name  = name;
+        this.hateMenus = hateMenus;
         this.weekMenus = new ArrayList<>();
     }
 
