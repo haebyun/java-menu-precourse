@@ -17,6 +17,13 @@ public class RecommendMenuController {
     }
 
     public void start() {
-
+        outputView.readStartMessage();
+        String[] coaches = inputView.getCoachesName();
+        for (String coach : coaches) {
+            recommendService.setCoaches(coach, inputView.getHateMenus(coach));
+        }
+        recommendService.setCategories();
+        recommendService.setCoachesMenus();
+        outputView.readResult(recommendService.getCategories(),recommendService.getCoaches());
     }
 }
