@@ -15,9 +15,7 @@ public class Coach {
         this.weekMenus = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
     public List<String> getWeekMenus() {
         return weekMenus;
@@ -41,7 +39,7 @@ public class Coach {
         return weekMenus.contains(menu);
     }
 
-    private Boolean isNotHateFood(String menu) {
+    public Boolean isNotHateFood(String menu) {
         List<String> hateList = Arrays.stream(hateMenus)
                 .filter(hate -> !hate.equals(menu))
                 .distinct()

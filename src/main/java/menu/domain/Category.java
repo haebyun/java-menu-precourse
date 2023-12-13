@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Category {
 
-
     private final List<String> weekCategories;
 
     public Category() {
