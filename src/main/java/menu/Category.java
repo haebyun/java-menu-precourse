@@ -28,6 +28,10 @@ public class Category {
         this.weekCategories = new ArrayList<>();
     }
 
+    public List<String> getWeekCategories() {
+        return weekCategories;
+    }
+
     public void setWeekCategories(String category) {
         if (weekCategories.size() < 5) {
             if (!isOverThreeTimes(category)) {
